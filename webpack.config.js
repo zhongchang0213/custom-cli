@@ -13,35 +13,47 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "js/[name]_[hash:8].js",
   },
+  resolveLoader: {
+    modules: ["./node_modules", "./myLoaders"],
+  },
   module: {
-    rules: [{
-        test: /\.css$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
-        ],
-      },
+    rules: [
+      // {
+      //   test: /\.css$/i,
+      //   use: [
+      //     MiniCssExtractPlugin.loader,
+      //     "css-loader",
+      //     "postcss-loader",
+      //   ],
+      // },
+      // {
+      //   test: /.css$/,
+      //   use: ["style-loader", "css-loader"],
+      // },
       {
-        test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
-          {
-            loader: "less-loader",
-          },
-        ],
+        test: /.less$/,
+        use: ["styleLoader", "cssLoader", "lessLoader"],
       },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
-          "sass-loader",
-        ],
-      },
+      // {
+      //   test: /\.less$/,
+      //   use: [
+      //     MiniCssExtractPlugin.loader,
+      //     "css-loader",
+      //     "postcss-loader",
+      //     {
+      //       loader: "less-loader",
+      //     },
+      //   ],
+      // },
+      // {
+      //   test: /\.s[ac]ss$/i,
+      //   use: [
+      //     MiniCssExtractPlugin.loader,
+      //     "css-loader",
+      //     "postcss-loader",
+      //     "sass-loader",
+      //   ],
+      // },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [{
@@ -61,10 +73,10 @@ module.exports = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: "css/[name][chunkhash:8].css",
-      chunkFilename: "[id].css"
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: "css/[name][chunkhash:8].css",
+    //   chunkFilename: "[id].css"
+    // }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "index.html"),
