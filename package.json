@@ -2,7 +2,7 @@
   "name": "custom-cli",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "serve": "webpack --mode development",
     "build": "webpack --mode production"
