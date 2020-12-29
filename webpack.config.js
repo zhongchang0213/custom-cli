@@ -6,13 +6,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const resolve = dir => path.resolve(__dirname, dir);
+const outputpath = resolve("dist")
 
 module.exports = {
   entry: {
     main: "./src/main.js"
   },
   output: {
-    path: resolve("dist"),
+    path: outputpath,
     filename: "js/[name]_[hash:8].js",
   },
   module: {
@@ -90,5 +91,30 @@ module.exports = {
       template: resolve("index.html"),
       filename: "index.html"
     })
-  ]
+  ],
+  resolve: {
+    extensions: ['.js', '.vue', '.json'], // '.jsx'  尝试按顺序解析这些后缀名
+    alias: {
+      '@': resolve("src"),
+    }
+  },
+  // https://webpack.docschina.org/configuration/devtool/#root
+  devtool: "cheap-module-source-map",
+  devServer: {
+    contentBase: outputpath,
+    compress: true,
+    open: false,
+    disableHostCheck: true, // 当将此项配置设置为 true 时，将会跳过 host 检查
+    port: 8081,
+    host: '0.0.0.0',
+    proxy: {
+      '/api': {
+        target: 'http://mgr.mshz.com:9092', // 此处可以配合SwitchHosts 172.16.61.22 mgr.mshz.com
+        ws: true,
+        changeOrigin: true,
+        hot: true, //即便HMR不生效，浏览器也不自动刷新，就开启hotOnly
+        hotOnly: true
+      }
+    }
+  }
 }
