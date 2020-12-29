@@ -1,4 +1,10 @@
 body {
   display: flex;
   font-size: 30px;
+  .right {
+    float: right;
+    width: 100px;
+    height: 100px;
+    background: url('../images/users.png') no-repeat center bottom;
+  }
 }

@@ -18,16 +18,24 @@ module.exports = {
   module: {
     rules: [{
         test: /\.css$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
+        use: [{
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../"
+            }
+          },
           "css-loader",
           "postcss-loader",
         ],
       },
       {
         test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader,
+        use: [{
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../"
+            }
+          },
           "css-loader",
           "postcss-loader",
           {
@@ -37,8 +45,12 @@ module.exports = {
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
+        use: [{
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../"
+            }
+          },
           "css-loader",
           "postcss-loader",
           "sass-loader",
@@ -49,16 +61,21 @@ module.exports = {
         use: [{
           loader: 'url-loader',
           options: {
-            name: "[name]_[hash:8].[ext]",
-            outputPath: "images/",
-            //小于2048，才转换成base64
-            limit: 1024,
+            name: "images/[name]_[hash:8].[ext]",
+            // outputPath: "images/",
+            // publicPath: "./",
+            //小于3kb，才转换成base64
+            limit: 3 * 1024,
           },
         }]
       },
       {
         test: /\.(eot|ttf|woff|woff2|svg)$/,
         use: "file-loader"
+      },
+      {
+        test: /\.(htm|html)$/i,
+        loader: 'html-loader'
       }
     ]
   },

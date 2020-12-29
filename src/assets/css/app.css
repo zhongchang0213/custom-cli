@@ -1,4 +1,4 @@
 body {
-  
-  background-color: #ccc;
+  height: 100%;
+  background: url('../images/users.png') no-repeat center bottom;
 }
