@@ -21,7 +21,8 @@ module.exports = {
         use: [{
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "../"
+              publicPath: "../",
+              // hmr: true, // 模块热替换，仅需在开发环境开启
             }
           },
           "css-loader",
